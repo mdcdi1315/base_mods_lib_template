@@ -1,0 +1,25 @@
+repositories {
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
+	
+	maven {
+		url = "https://maven.pkg.github.com/mdcdi1315/mdcdi1315_base_mods_lib"
+		content {
+			includeGroup 'com.github.mdcdi1315'
+		}
+	}
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Minecraft'
+                url = 'https://libraries.minecraft.net/'
+            }
+        }
+        filter { includeGroupAndSubgroups("com.mojang") }
+    }
+}
