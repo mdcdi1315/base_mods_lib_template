@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'deps_resolver'
 }
 
 base {
@@ -43,19 +44,6 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains:annotations:24.1.0'
-	var library = "com.github.mdcdi1315:mdcdi1315_base_mods_lib-${project.name}-${minecraft_version}:${base_mods_lib_version}"
-	if (project.name == "fabric") {
-		// For fabric projects, I ship the remapped jar. So we need a modImplementation instead.
-		modImplementation (library) {
-            capabilities {
-                // TODO: This is a flaky fix for fixing the Fabric module re-declaration. We need to find a way to directly negotiate the correct artifact.
-                it.requireCapability("com.github.mdcdi1315:mdcdi1315-base-mods-lib-fabric:${base_mods_lib_version}")
-            }
-        }
-	} else if (project.name == "forge") {
-		// Forge development, MDG uses 'implementation' instead.
-		implementation library
-	}
 }
 
 // Declare capabilities on the outgoing configurations.
@@ -119,6 +107,8 @@ processResources {
             'homepage'                     : homepage,
             'sources'                      : sources,
             'issues'                       : issues,
+            'discord'                      : discord,
+            'base_mods_lib_version'        : base_mods_lib_version,
             "forge_version"                : forge_version,
             "forge_version_range"          : forge_version_range,
             "forge_loader_version_range"   : forge_loader_version_range,
@@ -143,25 +133,4 @@ processResources {
     }
 
     inputs.properties(expandProps)
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri(github_packages_upload_url)
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-            }
-        }
-    }
-    publications {
-        gpr(MavenPublication) {
-            defaultTasks("jar")
-            from(components.java)
-            version = "${version}"
-            artifactId = "${mod_id}-${project.name}-${minecraft_version}"
-        }
-    }
 }
