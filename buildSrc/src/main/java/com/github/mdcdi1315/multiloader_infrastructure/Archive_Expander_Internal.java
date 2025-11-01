@@ -47,7 +47,9 @@ public final class Archive_Expander_Internal
         return t.getName().endsWith(".zip");
     }
 
-    public static void ExpandArchives(Project p, Logger logger)
+    private static boolean DirectoryFileFilterImpl(File t) { return t.isDirectory(); }
+
+    public static void ExpandArchives(Project p, Logger logger, boolean update)
             throws java.io.IOException
     {
         var root_dir = p.getLayout().getProjectDirectory().dir("deps");
@@ -68,6 +70,26 @@ public final class Archive_Expander_Internal
 
         if (project_mv == null) {
             throw new IllegalStateException("Cannot find the Minecraft Version project property!");
+        }
+
+        if (update)
+        {
+            // Update task is running instead, we need to update our dependencies.
+            // To do that we will delete our generated directories (if any).
+            var list_update = root_dir.getAsFile().listFiles(Archive_Expander_Internal::DirectoryFileFilterImpl);
+            if (list_update == null) {
+                throw new IllegalStateException("I/O error occurred!");
+            }
+            File[] tf;
+            for (File f : list_update)
+            {
+                tf = f.listFiles();
+                if (tf == null) {
+                    logger.lifecycle(String.format("I/O error occurred attempting to delete directory %s. Deletion will be ignored for the in question directory.", f.getName()));
+                } else {
+                    for (var fi : tf) { fi.delete(); }
+                }
+            }
         }
 
         for (File f : list)
