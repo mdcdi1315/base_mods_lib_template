@@ -26,8 +26,8 @@
 	"license": "${license}",
 	"environment": "*",
 	"entrypoints": {
-		"main": [],
-		"client": [],
+		"mdcdi1315_basemodslib_server": [],
+		"mdcdi1315_basemodslib_client": [],
 		"fabric-datagen": []
 	},
 	"mixins": [
