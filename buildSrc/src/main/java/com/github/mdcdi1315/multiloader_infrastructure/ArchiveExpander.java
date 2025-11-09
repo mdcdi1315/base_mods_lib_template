@@ -39,9 +39,17 @@ public final class ArchiveExpander
     }
 
     @Override
-    public void apply(Project target) {
+    public void apply(Project target)
+    {
+        Task t;
         var tasks = target.getTasks();
-        tasks.register("expand_dep_archives").configure(new ExpandDevArchivesTranslater(target));
-        tasks.register("update_dep_archives").configure(new UpdateDevArchivesTranslater(target));
+        var expand_archives_task = tasks.register("expand_dep_archives");
+        expand_archives_task.configure(new ExpandDevArchivesTranslater(target));
+        (t = expand_archives_task.get()).setDescription("Expands all the Developer archives found on the 'deps' directory. For initial project setup only.");
+        t.setGroup("build setup");
+        var update_archives_task = tasks.register("update_dep_archives");
+        update_archives_task.configure(new UpdateDevArchivesTranslater(target));
+        (t = update_archives_task.get()).setDescription("Updates all the Developer archives found on the 'deps' directory.");
+        t.setGroup("build setup");
     }
 }

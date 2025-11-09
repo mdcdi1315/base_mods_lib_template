@@ -94,7 +94,7 @@ javadoc {
 processResources {
     var expandProps = [
             'version'                      : version,
-            'group'                        : project.group, //Else we target the task's group.
+            'group'                        : project.group, // Else we target the task's group.
             'minecraft_version'            : minecraft_version,
             'minecraft_version_range'      : minecraft_version_range,
             'fabric_version'               : fabric_version,
@@ -108,7 +108,7 @@ processResources {
             'sources'                      : sources,
             'issues'                       : issues,
             'discord'                      : discord,
-            'base_mods_lib_version'        : base_mods_lib_version,
+            'base_mods_lib_version'        : mdcdi1315_base_mods_lib_version,
             "forge_version"                : forge_version,
             "forge_version_range"          : forge_version_range,
             "forge_loader_version_range"   : forge_loader_version_range,
