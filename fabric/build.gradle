@@ -38,19 +38,19 @@ loom {
     runs {
         client {
             client()
-            setConfigName("fabric Client")
+            setConfigName("Fabric Client")
             ideConfigGenerated(true)
             runDir("run")
         }
         server {
             server()
-            setConfigName("fabric Server")
+            setConfigName("Fabric Server")
             ideConfigGenerated(true)
             runDir("run")
         }
         data {
             inherit client
-            setConfigName("fabric Data")
+            setConfigName("Fabric Data")
             ideConfigGenerated(true)
             runDir("build/datagen")
 
