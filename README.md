@@ -7,7 +7,7 @@ Depending on the versions and modloaders available, this repository will reflect
 > [!WARNING]
 You should select the correct branch when creating your repository. Each branch represents a supported Minecraft version.
 
-Delete the contents of this file and replace them with you own description once done.
+Delete the contents of this file and replace them with your own description once done.
 
 ### Mod creation instructions:
 

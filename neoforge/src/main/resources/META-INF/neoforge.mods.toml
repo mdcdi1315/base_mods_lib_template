@@ -30,6 +30,6 @@ side="BOTH"
 [[dependencies.${mod_id}]]
 modId="mdcdi1315_base_mods_lib"
 type="required"
-versionRange="[${mdcdi1315_base_mods_lib_version},)"
+versionRange="[${base_mods_lib_version},)"
 ordering="AFTER"
 side="BOTH"
