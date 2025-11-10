@@ -81,8 +81,8 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 
 modrinth {
     //token = project.findProperty("modrinth.token") ?: System.getenv("MODRINTH_TOKEN") ?: "none"
-    projectId = project.modrinth_project_id
-    versionType = project.modrinth_release_type
+    projectId = modrinth_project_id
+    versionType = modrinth_release_type
     versionNumber = project.version + "+fabric-" + project.minecraft_version
     uploadFile = remapJar
     changelog = rootProject.file("CHANGELOG.md").text
