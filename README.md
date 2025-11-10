@@ -7,7 +7,7 @@ Depending on the versions and modloaders available, this repository will reflect
 > [!WARNING]
 You should select the correct branch when creating your repository. Each branch represents a supported Minecraft version.
 
-Delete the contents of this file and replace them with you own description once done.
+Delete the contents of this file and replace them with your own description once done.
 
 ### Mod creation instructions:
 
@@ -39,7 +39,10 @@ Down in the 'Assets' spoiler, expand it and download the 'bml-&lt;VERSION&gt;.zi
 
 Where &lt;VERSION&gt; the version number of the release.
 
-Now, open the file with an archiver and extract the `mdcdi1315_base_mods_lib_dev_package.zip` file for the Minecraft distribution you are currently using.
+Now, open the file with an archiver.
+
+You will see folders with their names to be Minecraft versions. Open the folder for the version that you wish to develop against 
+and extract the `mdcdi1315_base_mods_lib_dev_package.zip` file for the Minecraft distribution you are currently using.
 
 Place the expanded file on the `deps` directory. 
 
