@@ -127,7 +127,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 
     def mainFile = it.upload(curseforge_project_id, project.layout.buildDirectory.file("libs/${base.archivesName.get()}-${version}.jar").get().getAsFile())
     mainFile.changelog = rootProject.file('CHANGELOG.md').text
-    mainFile.addRequirement("mdcdi1315_base_mods_lib")
+    mainFile.addRequirement("mdcdi1315-base-lib")
     project.minecraft_versions.split(',').toList().each { mainFile.addGameVersion(it) }
     mainFile.releaseType = curseforge_release_type
     mainFile.addModLoader("Forge")
@@ -144,7 +144,7 @@ modrinth {
     syncBodyFrom = rootProject.file("modpage.md").text
     loaders = ['forge']
     dependencies {
-        required.project "mdcdi1315_base_mods_lib"
+        required.project "mdcdi1315-base-lib"
     }
 }
 
