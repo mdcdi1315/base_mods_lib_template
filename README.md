@@ -54,15 +54,18 @@ This declares that you declare a server-side mod and it's mod instance is declar
 
 Optional: If you have a client-side mod part as well, you can declare it as described in Step 4 but using as a property name the `client_mod_instance_class_name` instead.
 
-> [!NOTE] Fabric does not need a language provider since it explicitly supports class names in the entry point declaration.
+> [!NOTE] 
+Fabric does not need a language provider since it explicitly supports class names in the entry point declaration.
 See the provided `fabric.mod.json` file under the `fabric` project, go the `entrypoints` section and add the class names in 
 the `mdcdi1315_basemodslib_server` array field for server-side mods and in the `mdcdi1315_basemodslib_client` for client-side mods. 
 
-> [!NOTE] A similar process for Forge is done. 
+> [!NOTE] 
+A similar process for Forge is done. 
 You just modify instead the `modLoader` field value to be `bml_java_fml` and you add the mod instance class names properties as described above.
 Do not modify the `loaderVersion` field as Forge requires it to have the Forge-Specific version each time.
 
-> [!NOTE] This is **RECOMMENDED** for all new modders that are now diving into Minecraft modding, 
+> [!NOTE] 
+This is **RECOMMENDED** for all new modders that are now diving into Minecraft modding, 
 as it efficiently manages the mod instance creation and takes away the effort of declaring the mod to the loader. 
 
 #### Working with Mixin
