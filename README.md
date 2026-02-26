@@ -21,36 +21,52 @@ The file describes what each property is.
 
 This project contains all the Minecraft only code of your project, as well as my bare library abstractions.
 
-You do still need to interact with the underlying mod loader, depending on what you want to do each time.
+You might still need to interact with the underlying mod loader, depending on what you want to do each time.
 
-#### Working with the library and external 'Developer Packages'
+#### Working with the library
 
-The Base Mods Library is distributed through a Developer Package.
+From now on the library is distributed through GitHub Packages.
 
-You need to set up your project in order to finally include the library in your development environment.
+As such you need a [GitHub account](https://www.github.com) and a [classic API token](https://www.docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) with the `read:packages` access.
 
--> Downloading the Developer Package:
+Then, the template automatically injects for you the BML library into the project.
 
-Head over to the [Base Mods Library Repository Releases](https://github.com/mdcdi1315/mdcdi1315_base_mods_lib/releases) tab.
+See the `github.username` and `github.token` properties for more information.
 
-From there, select the latest stable version.
+#### Using the library's Language Providers
 
-Down in the 'Assets' spoiler, expand it and download the 'bml-&lt;VERSION&gt;.zip' file.
+The BML library does also provide mod language providers to 
+avoid the need of declaring your mod to the BML library
+with the mod-loader entry point and then be initialized.
+This is done for NeoForge as follows:
 
-Where &lt;VERSION&gt; the version number of the release.
+1. Open the `META-INF/neoforge.mods.toml` file.
 
-Now, open the file with an archiver and extract the `mdcdi1315_base_mods_lib_dev_package.zip` file for the Minecraft distribution you are currently using.
+2. Modify the `modLoader` field value to be `bml_java_fml` instead.
 
-Place the expanded file on the `deps` directory. 
+3. Modify the `loaderVersion` field value to be `[1.0.0,)` instead.
 
-> [!CAUTION]
-After doing that, you should also verify that the `mdcdi1315_base_mods_lib_version` property is set to the version number mentioned in the release file. If is not, the build system will fail to apply the developer package.
+4. To the `[[mods]]` declaration, add a field `server_mod_instance_class_name`:
+~~~TOML
+server_mod_instance_class_name="example.mod.ServerModInstance"
+~~~
+This declares that you declare a server-side mod and it's mod instance is declared through the name specified in `server_mod_instance_class_name`.
 
-Now, run Gradle with the task named `expand_dev_archives`. This will expand the developer package and set up the environment appropriately.
+Optional: If you have a client-side mod part as well, you can declare it as described in Step 4 but using as a property name the `client_mod_instance_class_name` instead.
 
-That was it!
+> [!NOTE] 
+Fabric does not need a language provider since it explicitly supports class names in the entry point declaration.
+See the provided `fabric.mod.json` file under the `fabric` project, go the `entrypoints` section and add the class names in 
+the `mdcdi1315_basemodslib_server` array field for server-side mods and in the `mdcdi1315_basemodslib_client` for client-side mods. 
 
-If you want in the future to update the library due to a new feature that you want to make use of, replace with the newer developer package and run the `update_dep_archives` task instead.
+> [!NOTE] 
+A similar process for Forge is done. 
+You just modify instead the `modLoader` field value to be `bml_java_fml` and you add the mod instance class names properties as described above.
+Do not modify the `loaderVersion` field as Forge requires it to have the Forge-Specific version each time.
+
+> [!NOTE] 
+This is **RECOMMENDED** for all new modders that are now diving into Minecraft modding, 
+as it efficiently manages the mod instance creation and takes away the effort of declaring the mod to the loader. 
 
 #### Working with Mixin
 
@@ -71,6 +87,10 @@ It has the following file structure.
 > [!CAUTION]
 Make sure to remove the comments when you finalize the files as otherwise it will cause a runtime error.
 
+> [!NOTE] 
+Even in the case that you do not declare any Mixin classes, you still need to provide the files as empty because all the mod loaders expect from you to have declared a Mixin class. 
+However, specifying config files with no any Mixin classes is perfectly valid.
+
 ~~~JSON
 {
 	"required": true,
@@ -79,12 +99,12 @@ Make sure to remove the comments when you finalize the files as otherwise it wil
 	"refmap": "${mod_id}.refmap.json", // Leave this as is.
 	"compatibilityLevel": "JAVA_17", 
 	"client": [
-		// Declare class names here that represent mixins running on the Minecraft client only.
-        // IMPORTANT: Only the class name is needed: You have qualified the full path to the class by using the 'package' property above.
+            // Declare class names here that represent mixins running on the Minecraft client only.
+            // IMPORTANT: Only the class name is needed: You have qualified the full path to the class by using the 'package' property above.
 	],
 	"mixins": [
-		// Declare class names here that represent mixins running on both Minecraft environments (client, server).
-		// IMPORTANT: Only the class name is needed: You have qualified the full path to the class by using the 'package' property above.
+            // Declare class names here that represent mixins running on both Minecraft environments (client, server).
+            // IMPORTANT: Only the class name is needed: You have qualified the full path to the class by using the 'package' property above.
 	],
 	"injectors": {
 		"defaultRequire": 1
