@@ -1,3 +1,4 @@
 dependencies {
+    annotationProcessor "com.github.mdcdi1315:bml_annotation_processor:${bml_annotation_processor_version}"
     implementation "com.github.mdcdi1315:bml-platform_agnostic-${minecraft_version}:${mdcdi1315_base_mods_lib_version}"
 }
