@@ -32,10 +32,14 @@ neoForge {
 
         client {
             client()
+
+            gameDirectory = file("runs/client")
         }
 
         server {
             server()
+
+            gameDirectory = file("runs/server")
         }
     }
 

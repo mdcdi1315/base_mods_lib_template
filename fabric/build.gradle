@@ -40,19 +40,19 @@ loom {
             client()
             setConfigName("fabric Client")
             ideConfigGenerated(true)
-            runDir("run")
+            runDir("runs/client")
         }
         server {
             server()
             setConfigName("fabric Server")
             ideConfigGenerated(true)
-            runDir("run")
+            runDir("runs/server")
         }
         data {
             inherit client
             setConfigName("fabric Data")
             ideConfigGenerated(true)
-            runDir("build/datagen")
+            runDir("runs/data_generation")
 
             vmArg "-Dfabric-api.datagen"
             vmArg "-Dfabric-api.datagen.output-dir=${project(":platform_agnostic").file("src/main/generated")}"
