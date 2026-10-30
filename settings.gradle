@@ -2,22 +2,34 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
+
+        maven {
+            name = "NeoForged Maven"
+            url = 'https://maven.neoforged.net/releases/'
+            content {
+                includeGroup "net.neoforged"
+            }
+        }
+
+        // https://docs.gradle.org/current/userguide/declaring_repositories.html#declaring_content_exclusively_found_in_one_repository
         exclusiveContent {
             forRepository {
                 maven {
-                    name = 'Fabric'
+                    name = "Fabric Maven"
                     url = uri("https://maven.fabricmc.net")
                 }
             }
             filter {
-                includeGroup("net.fabricmc")
-                includeGroup("fabric-loom")
+                includeGroup('net.fabricmc')
+                includeGroup('net.fabricmc.unpick')
+                includeGroup('net.fabricmc.fabric-loom')
             }
         }
+
         exclusiveContent {
             forRepository {
                 maven {
-                    name = 'Sponge'
+                    name = "Sponge Maven"
                     url = uri('https://repo.spongepowered.org/repository/maven-public')
                 }
             }
@@ -25,17 +37,7 @@ pluginManagement {
                 includeGroupAndSubgroups("org.spongepowered")
             }
         }
-        exclusiveContent {
-            forRepository {
-                maven {
-                    name = 'Forge'
-                    url = uri("https://maven.minecraftforge.net")
-                }
-            }
-            filter {
-                includeGroupAndSubgroups("net.minecraftforge")
-            }
-        }
+
     }
 }
 
@@ -43,4 +45,4 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
-include('platform_agnostic', 'forge', 'fabric', 'neoforge')
+include('platform_agnostic', 'fabric', 'neoforge')

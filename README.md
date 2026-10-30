@@ -31,7 +31,7 @@ As such you need a [GitHub account](https://www.github.com) and a [classic API t
 
 Then, the template automatically injects for you the BML library into the project.
 
-See the `github.username` and `github.token` properties for more information.
+See the `github.username` and `github.token` properties in `gradle.properties` for more information.
 
 #### Using the library's Language Providers
 
@@ -60,11 +60,6 @@ See the provided `fabric.mod.json` file under the `fabric` project, go the `entr
 the `mdcdi1315_basemodslib_server` array field for server-side mods and in the `mdcdi1315_basemodslib_client` for client-side mods. 
 
 > [!NOTE] 
-A similar process for Forge is done. 
-You just modify instead the `modLoader` field value to be `bml_java_fml` and you add the mod instance class names properties as described above.
-Do not modify the `loaderVersion` field as Forge requires it to have the Forge-Specific version each time.
-
-> [!NOTE] 
 This is **RECOMMENDED** for all new modders that are now diving into Minecraft modding, 
 as it efficiently manages the mod instance creation and takes away the effort of declaring the mod to the loader. 
 
@@ -87,7 +82,7 @@ It has the following file structure.
 > [!CAUTION]
 Make sure to remove the comments when you finalize the files as otherwise it will cause a runtime error.
 
-> [!NOTE] 
+> [!NOTE]
 Even in the case that you do not declare any Mixin classes, you still need to provide the files as empty because all the mod loaders expect from you to have declared a Mixin class. 
 However, specifying config files with no any Mixin classes is perfectly valid.
 
